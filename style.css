@@ -131,6 +131,9 @@ body::before {
   display: flex;
   gap: 5rem;
 }
+img{
+  object-fit: cover;
+}
 
 .condition-item {
   display: flex;

@@ -47,12 +47,13 @@ async function getFetchData(endPoint, city) {
 function getWeatherIcon(id) {
   if (id >= 200 && id <= 232) return "thunderstorm.png";
   if (id >= 300 && id <= 321) return "drizzle.png";
-  if (id >= 500 && id <= 531) return "rain.png";
+  if (id >= 500 && id <= 531) return "Rain.png"; 
   if (id >= 600 && id <= 622) return "snow.png";
   if (id >= 701 && id <= 781) return "atmosphere.png";
-  if (id === 800) return "clear-2.png";
+  if (id === 800) return "Clear-2.png"; 
   else return "clouds-png.png";
 }
+
 
 function getCurrentDate() {
   const currentDate = new Date();

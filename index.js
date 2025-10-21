@@ -17,6 +17,8 @@ const currentDateTxt = document.querySelector(".current-date-txt");
 const forecastItemContainer = document.querySelector(
   ".forecast-item-container"
 );
+const loadingSection = document.querySelector(".loading");
+
 
 const apiKey = "32626c963a0e5263efbe394766ad594d";
 
@@ -64,13 +66,14 @@ function getCurrentDate() {
 }
 
 async function updateWeatherInfo(city) {
+  showDisplaySection(loadingSection); // show loader first
+
   const weatherData = await getFetchData("weather", city);
 
   if (weatherData.cod != 200) {
     showDisplaySection(notFoundSection);
     return;
   }
-  console.log(weatherData);
 
   const {
     name: cityName,
@@ -78,6 +81,7 @@ async function updateWeatherInfo(city) {
     weather: [{ id, main }],
     wind: { speed },
   } = weatherData;
+
   countryTxt.textContent = cityName;
   tempTxt.textContent = Math.round(temp) + "°C";
   conditionTxt.textContent = main;
@@ -88,7 +92,7 @@ async function updateWeatherInfo(city) {
   weatherSummaryContainerImg.src = `./images/${getWeatherIcon(id)}`;
 
   await updateForecastsInfo(city);
-  showDisplaySection(weatherInfoSection);
+  showDisplaySection(weatherInfoSection); // hide loader, show weather
 }
 
 async function updateForecastsInfo(city) {
@@ -132,9 +136,10 @@ function updateForecastsItems(weatherData) {
   forecastItemContainer.insertAdjacentHTML("beforeend", forecastItem)
 }
 
-function showDisplaySection(section) {
-  [weatherInfoSection, searchCitySection, notFoundSection].forEach(
+function showDisplaySection(sectionToShow) {
+  [weatherInfoSection, searchCitySection, notFoundSection, loadingSection].forEach(
     (section) => (section.style.display = "none")
   );
-  section.style.display = "flex";
+  sectionToShow.style.display = "flex";
 }
+

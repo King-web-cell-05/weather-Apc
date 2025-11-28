@@ -258,6 +258,7 @@ img{
   animation: pulse 1.6s infinite ease-in-out;
 }
 
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
